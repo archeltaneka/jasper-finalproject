@@ -7,10 +7,10 @@ WORDS = ["TURN", "ON", "LIGHT"]
 
 def handle(text, mic, profile):
 
-	GPIO.setmode(GPIO.BCM)
+	#GPIO.setmode(GPIO.BCM)
 	
 	#setting up the pin to be a pin that outputs information
-	GPIO.output(18, GPIO.HIGH) #kita pake GPIO18
+	#GPIO.output(18, GPIO.HIGH) #kita pake GPIO18
 	
 	#yg ini bisa buat off kayaknya
 	#time.sleep(3)
@@ -22,4 +22,4 @@ def handle(text, mic, profile):
 	mic.say(message)
 
 def isValid(text):
-	return bool(re.search(r'\bturn on light\b', text, re.IGNORECASE))
+	return bool(re.search(r'\b(turn on light | light on | turn on the light)\b', text, re.IGNORECASE))
