@@ -17,4 +17,4 @@ def handle(text, mic, profile):
 	mic.say(message)
 
 def isValid(text):
-	return bool(re.search(r'\b(turn off light)\b', text, re.IGNORECASE))
+	return bool(re.search(r'\b(turn off light|turn off the light|light off|lights off)\b', text, re.IGNORECASE))
