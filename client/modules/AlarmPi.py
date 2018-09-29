@@ -33,8 +33,8 @@ def wordstoint(words):
     elif "twelve" in word.lower():
         value = "12"
     else :
-	int_val = int(re.search(r'\d+', word).group())      
-	value = str(int_val)
+        int_val = int(re.search(r'\d+', word).group())      
+	    value = str(int_val)
 
     if "pm" in word.lower() or "p.m." in word.lower():
         valueInt = int(value)
