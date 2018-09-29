@@ -4,7 +4,7 @@ import re
 import os
 import subprocess
 
-WORDS = ["SHUT DOWN", "SHUT", "DOWN", "SLEEP"]
+WORDS = ["SHUTDOWN", "SHUT", "DOWN"]
 
 PRIORITY = 3
 
