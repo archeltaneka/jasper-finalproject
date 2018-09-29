@@ -4,7 +4,7 @@ import re
 import os
 import subprocess
 
-WORDS = ["SHUT DOWN", "SHUT", "DOWN", "SLEEP"]
+WORDS = ["SHUTDOWN", "SHUT", "DOWN"]
 
 PRIORITY = 3
 
@@ -23,4 +23,4 @@ def handle(text, mic, profile):
     output = process.comunicate()[0]
     
 def isValid(text):
-    return bool(re.search(r'\b(SHUTDOWN | SHUT DOWN | SLEEP | GO SLEEP)\b', text, re.IGNORECASE))
+    return bool(re.search(r'\b(SHUTDOWN | SHUT DOWN)\b', text, re.IGNORECASE))
