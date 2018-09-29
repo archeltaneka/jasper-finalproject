@@ -1,11 +1,12 @@
 import datetime
 import re
+import os
 from client.app_utils import getTimezone
-from semantic.dates import DateService
+from datetime import datetime, time,timedelta
 
 WORDS = []
 
-def wordstoint(words):
+def wordstoint(word):
     value = ""
 
     if "one" in word.lower():
@@ -33,8 +34,8 @@ def wordstoint(words):
     elif "twelve" in word.lower():
         value = "12"
     else :
-        int_val = int(re.search(r'\d+', word).group())      
-	    value = str(int_val)
+        int_val = int(re.search(r'\d+', word).group())
+        value = str(int_val)
 
     if "pm" in word.lower() or "p.m." in word.lower():
         valueInt = int(value)
@@ -45,6 +46,8 @@ def wordstoint(words):
 
 def handle(text,mic,profile):
     mic.say("when the alarm will be set?")
+    global hour
+    global hourString
     text = mic.activeListen()
     hour = wordstoint(text)
     cronstring = 'echo "'
@@ -52,9 +55,10 @@ def handle(text,mic,profile):
     if hour > 12:
             hourInt = int(hour)
             hourInt = hourInt-12
-            hourString += str(hourInt)+" pm"
-    	else:
-            hourString +=str(hour)+ " am"
+            hourString = str(hourInt)+" pm"
+    else:
+            hourString = str(hour)+ " am"
+    
     mic.say("Setting alarm for " + " at " + hourString)
     os.system("cd /home/raspberry &&"+cronstring)
     
