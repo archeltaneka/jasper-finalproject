@@ -48,7 +48,7 @@ def handle(text,mic,profile):
     text = mic.activeListen()
     hour = wordstoint(text)
     cronstring = 'echo "'
-    cronstring 
+    cronstring += "0 " + hour+ " * * 3"
     if hour > 12:
             hourInt = int(hour)
             hourInt = hourInt-12
