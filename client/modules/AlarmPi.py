@@ -2,48 +2,6 @@ import datetime
 import re
 import os
 from client.app_utils import getTimezone
-<<<<<<< HEAD
-from datetime import datetime, time,timedelta
-
-WORDS = []
-
-def wordstoint(word):
-    value = ""
-
-    if "one" in word.lower():
-        value = "1"
-    elif "two" in word.lower():
-        value = "2"
-    elif "three" in word.lower():
-        value = "3"
-    elif "four" in word.lower():
-        value = "4"
-    elif "five" in word.lower():
-        value = "5"
-    elif "six" in word.lower():
-        value = "6"
-    elif "seven" in word.lower():
-        value = "7"
-    elif "eight" in word.lower():
-        value = "8"
-    elif "nine" in word.lower():
-        value = "9"
-    elif "ten" in word.lower():
-        value = "10"
-    elif "eleven" in word.lower():
-        value = "11"
-    elif "twelve" in word.lower():
-        value = "12"
-    else :
-        int_val = int(re.search(r'\d+', word).group())
-        value = str(int_val)
-
-    if "pm" in word.lower() or "p.m." in word.lower():
-        valueInt = int(value)
-        valueInt += 12
-        value = str(valueInt)
-        
-=======
 from semantic.dates import DateService
 from word2number import w2n 
 
@@ -97,8 +55,7 @@ def words_to_hour(word):
 ##        valueInt += 12
 ##        value = str(valueInt)
 ##        
->>>>>>> master
-    return value
+##    return value
 
 def words_to_minute(word):
 
@@ -113,20 +70,12 @@ def words_to_minute(word):
 
 
 def handle(text,mic,profile):
-<<<<<<< HEAD
-    mic.say("when the alarm will be set?")
-    global hour
-    global hourString
-    text = mic.activeListen()
-    hour = wordstoint(text)
-=======
     mic.say("what hour?")
     first = mic.activeListen()
     mic.say("what minute?")
     second = mic.activeListen()
     hour = w2n.word_to_num(first)
     minute = w2n.word_to_num(second)
->>>>>>> master
     cronstring = 'echo "'
     cronstring += minute + hour+ " * * 3" # belom lengkap
     if hour > 12:
