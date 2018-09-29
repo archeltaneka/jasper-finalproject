@@ -21,3 +21,8 @@ Sep 25, 2018
 Sep 26, 2018
 1. Fix on both light module (outdated version)
 2. Change on weather module (use openweathermap api)
+
+Sep 29, 2018
+1. Fix on shutdown module
+2. Fix on music module and add another modules necessary
+3. Added AlarmPi module
