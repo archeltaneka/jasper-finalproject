@@ -110,8 +110,8 @@ def handle(text, mic, profile):
 	else :
 	    sys.exit(1)
 
-    	cronString += ' /home/philipp/.jasper/alarmScript.sh" | tee -a /var/spool/cron/philipp'
-	print("cd /home/philipp &&"+cronString)
+    	cronString += ' /home/raspberry/.jasper/alarmScript.sh" | tee -a /var/spool/cron/philipp'
+	print("cd /home/raspberry &&"+cronString)
 
     	if hour > 12:
             hourInt = int(hour)
@@ -122,12 +122,12 @@ def handle(text, mic, profile):
 
     	mic.say("Setting alarm for " + weekdayString +" at "+ hourString)
 
-    	os.system("cd /home/philipp &&"+cronString)
+    	os.system("cd /home/raspberry &&"+cronString)
 
 
     elif "in" in text.lower() and ("hours" in text.lower() or "hour" in text.lower()):
 	hour = wordToInt(text)
-	command ='echo "/home/philipp/.jasper/jamesAlarm.py" |at now + ' 
+	command ='echo "/home/raspberry/.jasper/jamesAlarm.py" |at now + ' 
 	command += hour
 	command += " hours"
 	print(command)
