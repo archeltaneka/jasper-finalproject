@@ -19,7 +19,6 @@ class Mic:
     def __init__(self, speaker, passive_stt_engine, active_stt_engine):
         """
         Initiates the pocketsphinx instance.
-
         Arguments:
         speaker -- handles platform-independent audio output
         passive_stt_engine -- performs STT while Jasper is in passive listen
@@ -48,8 +47,8 @@ class Mic:
 
         # TODO: Consolidate variables from the next three functions
         THRESHOLD_MULTIPLIER = 1.8
-        RATE = 16000
-        CHUNK = 1024
+        RATE = 44000
+        CHUNK = 59
 
         # number of seconds to allow to establish threshold
         THRESHOLD_TIME = 1
@@ -93,8 +92,8 @@ class Mic:
         """
 
         THRESHOLD_MULTIPLIER = 1.8
-        RATE = 16000
-        CHUNK = 1024
+        RATE = 44000
+        CHUNK = 59
 
         # number of seconds to allow to establish threshold
         THRESHOLD_TIME = 1
@@ -186,7 +185,6 @@ class Mic:
     def activeListen(self, THRESHOLD=None, LISTEN=True, MUSIC=False):
         """
             Records until a second of silence or times out after 12 seconds
-
             Returns the first matching string or None
         """
 
@@ -198,13 +196,12 @@ class Mic:
                                  MUSIC=False):
         """
             Records until a second of silence or times out after 12 seconds
-
             Returns a list of the matching options or None
         """
 
-        RATE = 16000
-        CHUNK = 1024
-        LISTEN_TIME = 12
+        RATE = 44000
+        CHUNK = 59
+        LISTEN_TIME = 10
 
         # check if no threshold provided
         if THRESHOLD is None:
@@ -222,7 +219,7 @@ class Mic:
         frames = []
         # increasing the range # results in longer pause after command
         # generation
-        lastN = [THRESHOLD * 1.2 for i in range(30)]
+        lastN = [THRESHOLD * 1.2 for i in range(300)]
 
         for i in range(0, RATE / CHUNK * LISTEN_TIME):
 
@@ -236,7 +233,7 @@ class Mic:
             average = sum(lastN) / float(len(lastN))
 
             # TODO: 0.8 should not be a MAGIC NUMBER!
-            if average < THRESHOLD * 0.8:
+            if average < THRESHOLD * 0.5:
                 break
 
         self.speaker.play(jasperpath.data('audio', 'beep_lo.wav'))

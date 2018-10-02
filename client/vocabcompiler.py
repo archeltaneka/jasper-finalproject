@@ -54,7 +54,7 @@ class AbstractVocabulary(object):
         sha1.update(joined_phrases)
         return sha1.hexdigest()
 
-    def __init__(self, folder, name='default', path='.'):
+    def __init__(self, name='default', path='.'):
         """
         Initializes a new Vocabulary instance.
 

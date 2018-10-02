@@ -1,7 +1,6 @@
 # -*- coding: utf-8-*-
 """
 A Speaker handles audio output from Jasper to the user
-
 Speaker methods:
     say - output 'phrase' as speech
     play - play the audio in 'filename'
@@ -643,7 +642,6 @@ def get_engine_by_slug(slug=None):
     """
     Returns:
         A speaker implementation available on the current platform
-
     Raises:
         ValueError if no speaker implementation is supported on this platform
     """
