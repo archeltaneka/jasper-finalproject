@@ -48,7 +48,7 @@ class Mic:
         # TODO: Consolidate variables from the next three functions
         THRESHOLD_MULTIPLIER = 1.8
         RATE = 44000
-        CHUNK = 59
+        CHUNK = 216
 
         # number of seconds to allow to establish threshold
         THRESHOLD_TIME = 1
@@ -69,7 +69,7 @@ class Mic:
         # calculate the long run average, and thereby the proper threshold
         for i in range(0, RATE / CHUNK * THRESHOLD_TIME):
 
-            data = stream.read(CHUNK)
+            data = stream.read(CHUNK, exception_on_overflow = False)
             frames.append(data)
 
             # save this data point as a score
@@ -93,7 +93,7 @@ class Mic:
 
         THRESHOLD_MULTIPLIER = 1.8
         RATE = 44000
-        CHUNK = 59
+        CHUNK = 512
 
         # number of seconds to allow to establish threshold
         THRESHOLD_TIME = 1
@@ -200,7 +200,7 @@ class Mic:
         """
 
         RATE = 44000
-        CHUNK = 59
+        CHUNK = 512
         LISTEN_TIME = 10
 
         # check if no threshold provided
@@ -219,7 +219,7 @@ class Mic:
         frames = []
         # increasing the range # results in longer pause after command
         # generation
-        lastN = [THRESHOLD * 1.2 for i in range(300)]
+        lastN = [THRESHOLD * 1.2 for i in range(200)]
 
         for i in range(0, RATE / CHUNK * LISTEN_TIME):
 
@@ -233,7 +233,7 @@ class Mic:
             average = sum(lastN) / float(len(lastN))
 
             # TODO: 0.8 should not be a MAGIC NUMBER!
-            if average < THRESHOLD * 0.5:
+            if average < THRESHOLD * 0.4:
                 break
 
         self.speaker.play(jasperpath.data('audio', 'beep_lo.wav'))
