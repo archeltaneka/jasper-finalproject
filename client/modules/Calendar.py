@@ -5,6 +5,7 @@ import re
 import gflags
 import calendar
 import jasperpath
+import logging
 
 from client.app_utils import getTimezone
 from dateutil import tz
@@ -16,6 +17,7 @@ from oauth2client.client import AccessTokenRefreshError
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.tools import *
 
+logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.ERROR)
 
 # Written by Marc Poul Joseph Laventure
 

@@ -69,7 +69,7 @@ class Mic:
         # calculate the long run average, and thereby the proper threshold
         for i in range(0, RATE / CHUNK * THRESHOLD_TIME):
 
-            data = stream.read(CHUNK, exception_on_overflow = False)
+            data = stream.read(CHUNK)
             frames.append(data)
 
             # save this data point as a score
