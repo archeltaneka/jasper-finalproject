@@ -9,14 +9,11 @@ PRIORITY = 4
 
 def handle(text, mic, profile):
 
-    # Get the number of services available --> 60 calls per minute(free)
     serviceNum = NumberService()
-
-    # Get the current time in current city(Jakarta, ID)
+    
     def formatTimeStamp(unix_time):
         return datetime.fromtimestamp(unix_time).strftime("%B %d")
-
-    # Get the weather forecast: rainy, sunny, windy, humid, and cold
+        
     def getWeeklyWeatherReport(forecast,loc,temp_unit='celsius',report='current'):
         weather_report = "Weather forecast for next week at "+loc +". "
         rainy_days = len(forecast.when_rain())
@@ -82,8 +79,7 @@ def handle(text, mic, profile):
             date_str = ''
             
         return weather_report
-
-    # Identify the keyword: 'current' or 'tomorrow' or 'weekly' forecast        
+        
     def getWeatherReport(weather,loc,temp_unit='celsius',report='current'):
         weather_report = 'Server Down.'
         wind = weather.get_wind()
@@ -116,8 +112,7 @@ def handle(text, mic, profile):
                               +wind_speed+". with clouds cover "+clou+" percent."
         
         return weather_report
-
-    # Check for API key, current city and country, and temperature unit (celcius or fahrenheit)
+        
     if 'OpenWeatherMap' in profile:
         if 'api_key' in profile['OpenWeatherMap']:
             api_key = profile['OpenWeatherMap']['api_key']
@@ -129,8 +124,7 @@ def handle(text, mic, profile):
             temp_unit = profile['OpenWeatherMap']['temp_unit']
                         
     owm = pyowm.OWM(api_key)
-
-    # Return the forecast according to the keyword
+    
     if re.search(r'\b(CURRENT|TODAYS|TODAY)\b',text,re.IGNORECASE):
         cw = owm.weather_at_place(city_name+","+country)
         loc = cw.get_location().get_name()

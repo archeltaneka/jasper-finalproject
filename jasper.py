@@ -26,6 +26,7 @@ parser.add_argument('--no-network-check', action='store_true',
 parser.add_argument('--diagnose', action='store_true',
                     help='Run diagnose and exit')
 parser.add_argument('--debug', action='store_true', help='Show debug messages')
+parser.add_argument('--noauth_local_webserver', action='store_true', help='Allow configuration for Calendar Module')
 args = parser.parse_args()
 
 if args.local:
