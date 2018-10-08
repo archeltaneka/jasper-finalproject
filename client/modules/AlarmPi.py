@@ -99,29 +99,29 @@ def handle(text, mic, profile):
 
             os.system("cd /home/pi && "+cronString)
 
-    elif "today" in text.lower():
-            clock = text.split("to")
-            hour = w2n.word_to_num(clock[0])
-            minute = w2n.word_to_num(clock[1])
-            command ='echo "/home/pi/.jasper/" |at now + ' 
-            command += hour
-            command += " hours"
-            print(command)
-            os.system(command)
-            
-            xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
-            mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
-
-    elif "in" in text.lower() and ("hours" in text.lower() or "hour" in text.lower()):
-            hour = w2n.word_to_num(text)
-            command ='echo "/home/pi/.jasper/jamesAlarm.py" |at now + ' 
-            command += hour
-            command += " hours"
-            print(command)
-            os.system(command)
-            
-            xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
-            mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
+#    elif "today" in text.lower():
+#            clock = text.split("to")
+#            hour = w2n.word_to_num(clock[0])
+#            minute = w2n.word_to_num(clock[1])
+#            cronString += str(minute)+" "+str(hour)+" * * 0"
+#            cronString += ' /home/pi/.jasper/alarmScript.sh" | tee -a /var/spool/cron/crontabs/pi'
+#            print("cd /home/pi &&"+cronString)
+#            print(command)
+#            os.system(command)
+#            
+#            xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
+#            mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
+#
+#    elif "in" in text.lower() and ("hours" in text.lower() or "hour" in text.lower()):
+#            hour = w2n.word_to_num(text)
+#            command ='echo "/home/pi/.jasper/jamesAlarm.py" |at now + ' 
+#            command += hour
+#            command += " hours"
+#            print(command)
+#            os.system(command)
+#            
+#            xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
+#            mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
 
 def isValid(text):
     return bool(re.search(r'\b(((add|set) (a|another|an) (alarm|clock)|wake me))\b', text, re.IGNORECASE))
