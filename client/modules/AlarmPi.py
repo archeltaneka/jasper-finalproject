@@ -99,6 +99,18 @@ def handle(text, mic, profile):
 
             os.system("cd /home/pi && "+cronString)
 
+    elif "today" in text.lower():
+            clock = text.split("to")
+            hour = w2n.word_to_num(clock[0])
+            minute = w2n.word_to_num(clock[1])
+            command ='echo "/home/pi/.jasper/" |at now + ' 
+            command += hour
+            command += " hours"
+            print(command)
+            os.system(command)
+            
+            xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
+            mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
 
     elif "in" in text.lower() and ("hours" in text.lower() or "hour" in text.lower()):
             hour = w2n.word_to_num(text)
