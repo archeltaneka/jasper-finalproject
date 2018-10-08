@@ -14,57 +14,72 @@ def handle(text, mic, profile):
 
     final = random.choice(messages1)
     mic.say(final)
-    mic.say("What day it will be alarmed?")
     
     cronString = 'echo "'
 
     text.replace("at  ","",1)
     global weekdayString
     global hour
+    global minute
+    global clock
     global hourString
 
     if "every" in text.lower():
 
             if "monday" in text.lower():
                     text.replace("monday","",1)
-                    hour = w2n.word_to_num(text)
-                    cronString += "0 "+hour+" * * 1"
+                    clock = text.split("to")
+                    hour = w2n.word_to_num(clock[0])
+                    minute = hour = w2n.word_to_num(clock[1])
+                    cronString += minute+" "+hour+" * * 1"
                     weekdayString = "Monday"
 
             elif "tuesday" in text.lower():
-                    text.replace("tuesday","",1)
-                    hour = w2n.word_to_num(text)
-                    cronString += "0 "+hour+" * * 2"
-                    weekdayString = "Tuesday"
+                    text.replace("wednesday","",1)
+                    clock = text.split("to")
+                    hour = w2n.word_to_num(clock[0])
+                    minute = w2n.word_to_num(clock[1])
+                    cronString += str(minute)+" "+str(hour)+" * * 3"
+                    weekdayString = "Wednesday"
 
             elif "wednesday" in text.lower():
                     text.replace("wednesday","",1)
-                    hour = w2n.word_to_num(text)
-                    cronString += "0 "+hour+" * * 3"
+                    clock = text.split("to")
+                    hour = w2n.word_to_num(clock[0])
+                    minute = w2n.word_to_num(clock[1])
+                    cronString += str(minute)+" "+str(hour)+" * * 3"
                     weekdayString = "Wednesday"
 
             elif "thursday" in text.lower():
                     text.replace("thursday","",1)
-                    hour = w2n.word_to_num(text)
-                    cronString += "0 "+hour+" * * 4"
+                    clock = text.split("to")
+                    hour = w2n.word_to_num(clock[0])
+                    minute = w2n.word_to_num(clock[1])
+                    cronString += str(minute)+" "+str(hour)+" * * 4"
                     weekdayString = "Thursday"
 
             elif "friday" in text.lower():
                     text.replace("friday","",1)
-                    hour = w2n.word_to_num(text)
-                    cronString += "0 "+hour+" * * 5"
+                    clock = text.split("to")
+                    hour = w2n.word_to_num(clock[0])
+                    minute = w2n.word_to_num(clock[1])
+                    cronString += str(minute)+" "+str(hour)+" * * 5"
                     weekdayString = "Friday"
 
             elif "saturday" in text.lower():  
                     text.replace("saturday","",1)
-                    hour = w2n.word_to_num(text)
-                    cronString += "0 "+hour+" * * 6"
+                    clock = text.split("to")
+                    hour = w2n.word_to_num(clock[0])
+                    minute = w2n.word_to_num(clock[1])
+                    cronString += str(minute)+" "+str(hour)+" * * 6"
                     weekdayString = "Saturday"
 
             elif "sunday" in text.lower():
                     text.replace("sunday","",1)
-                    hour = w2n.word_to_num(text)
-                    cronString += "0 "+hour+" * * 0"
+                    clock = text.split("to")
+                    hour = w2n.word_to_num(clock[0])
+                    minute = w2n.word_to_num(clock[1])
+                    cronString += str(minute)+" "+str(hour)+" * * 0"
                     weekdayString = "Sunday"
 
             else :
