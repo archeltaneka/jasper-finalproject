@@ -55,11 +55,14 @@ def addEvent(profile, mic, service):
             mic.say("Added event " + createdEvent['summary'] + " on " + getReadableDateFromEvent(createdEvent, getTimezone(profile)) +
                     " " + getReadableTimeFromEvent(createdEvent, getTimezone(profile)))
             # Create a variable for POST
-            req = createdEvent['summary'] + " on " + getReadableDateFromEvent(createdEvent, getTimezone(profile)) + " " + getReadableTimeFromEvent(createdEvent, getTimezone(profile))
+            ev = createdEvent['summary']
+            dt = getReadableDateFromEvent(createdEvent, getTimezone(profile))
+            tm = getReadableTimeFromEvent(createdEvent, getTimezone(profile))
             mic.say("Is this what you wanted?")
             if bool(re.search(r'\bYes\b', mic.activeListen(), re.IGNORECASE)):
                 mic.say("Okay, it's on your calendar")
                 # POST request for req here
+                
             else:
                 mic.say("My mistake, english is my second language.")
                 service.events().delete(calendarId='primary', eventId=createdEvent['id']).execute()
