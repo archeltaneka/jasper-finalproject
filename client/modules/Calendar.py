@@ -6,6 +6,7 @@ import gflags
 import calendar
 import jasperpath
 import logging
+import requests
 
 from client.app_utils import getTimezone
 from dateutil import tz
