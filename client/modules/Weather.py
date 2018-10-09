@@ -1,5 +1,6 @@
 # -*- coding: utf-8-*-
 
+import requests
 import re
 import pyowm
 from semantic.numbers import NumberService
@@ -98,6 +99,10 @@ def handle(text, mic, profile):
                               +detstat+". Now Temperature is "+curr_temp+" degree "  \
                               +temp_unit+". Humidity "+humi+" percent. Wind Speed "  \
                               +wind_speed+". with cloud cover "+clou+" percent."
+            # POST loc, stat, detstat, curr_temp, temp_unit, humi, wind_speed, and cloud here
+            payload = {}
+            
+            
         
         elif report == 'tommorow':
             temp = weather.get_temperature(temp_unit)
@@ -131,7 +136,6 @@ def handle(text, mic, profile):
         weather = cw.get_weather()
         weather_report = getWeatherReport(weather,loc,temp_unit,report='current')
         mic.say(weather_report)
-        # POST the weather_report here
 
     elif re.search(r'\b(TOMORROWS|TOMORROW)\b',text,re.IGNORECASE):
         forecast = owm.daily_forecast(city_name)
