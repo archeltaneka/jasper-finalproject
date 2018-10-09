@@ -37,7 +37,7 @@ def handle(text, mic, profile):
                         minute = clock[2]
                     else:
                         minute = w2n.word_to_num(clock[2])
-                    cronString += minute+" "+hour+" * * 1"
+                    cronString += str(minute)+" "+str(hour)+" * * 1"
                     weekdayString = "Monday"
 
             elif "tuesday" in text.lower():
