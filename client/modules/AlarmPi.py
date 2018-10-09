@@ -28,57 +28,99 @@ def handle(text, mic, profile):
 
             if "monday" in text.lower():
                     text.replace("monday","",1)
-                    clock = text.split("to")
-                    hour = w2n.word_to_num(clock[0])
-                    minute = hour = w2n.word_to_num(clock[1])
+                    clock = re.split(' at | to ',text)
+                    if (clock[1].isdigit):
+                        hour = clock[1]
+                    else:
+                        hour = w2n.word_to_num(clock[1])
+                    if (clock[2].isdigit):
+                        minute = clock[2]
+                    else:
+                        minute = w2n.word_to_num(clock[2])
                     cronString += minute+" "+hour+" * * 1"
                     weekdayString = "Monday"
 
             elif "tuesday" in text.lower():
                     text.replace("wednesday","",1)
-                    clock = text.split("to")
-                    hour = w2n.word_to_num(clock[0])
-                    minute = w2n.word_to_num(clock[1])
+                    clock = re.split(' at | to ',text)
+                    if (clock[1].isdigit):
+                        hour = clock[1]
+                    else:
+                        hour = w2n.word_to_num(clock[1])
+                    if (clock[2].isdigit):
+                        minute = clock[2]
+                    else:
+                        minute = w2n.word_to_num(clock[2])
                     cronString += str(minute)+" "+str(hour)+" * * 3"
                     weekdayString = "Wednesday"
 
             elif "wednesday" in text.lower():
                     text.replace("wednesday","",1)
-                    clock = text.split("to")
-                    hour = w2n.word_to_num(clock[0])
-                    minute = w2n.word_to_num(clock[1])
+                    clock = re.split(' at | to ',text)
+                    if (clock[1].isdigit):
+                        hour = clock[1]
+                    else:
+                        hour = w2n.word_to_num(clock[1])
+                    if (clock[2].isdigit):
+                        minute = clock[2]
+                    else:
+                        minute = w2n.word_to_num(clock[2])
                     cronString += str(minute)+" "+str(hour)+" * * 3"
                     weekdayString = "Wednesday"
 
             elif "thursday" in text.lower():
                     text.replace("thursday","",1)
-                    clock = text.split("to")
-                    hour = w2n.word_to_num(clock[0])
-                    minute = w2n.word_to_num(clock[1])
+                    clock = re.split(' at | to ',text)
+                    if (clock[1].isdigit):
+                        hour = clock[1]
+                    else:
+                        hour = w2n.word_to_num(clock[1])
+                    if (clock[2].isdigit):
+                        minute = clock[2]
+                    else:
+                        minute = w2n.word_to_num(clock[2])
                     cronString += str(minute)+" "+str(hour)+" * * 4"
                     weekdayString = "Thursday"
 
             elif "friday" in text.lower():
                     text.replace("friday","",1)
-                    clock = text.split("to")
-                    hour = w2n.word_to_num(clock[0])
-                    minute = w2n.word_to_num(clock[1])
+                    clock = re.split(' at | to ',text)
+                    if (clock[1].isdigit):
+                        hour = clock[1]
+                    else:
+                        hour = w2n.word_to_num(clock[1])
+                    if (clock[2].isdigit):
+                        minute = clock[2]
+                    else:
+                        minute = w2n.word_to_num(clock[2])
                     cronString += str(minute)+" "+str(hour)+" * * 5"
                     weekdayString = "Friday"
 
             elif "saturday" in text.lower():  
                     text.replace("saturday","",1)
-                    clock = text.split("to")
-                    hour = w2n.word_to_num(clock[0])
-                    minute = w2n.word_to_num(clock[1])
+                    clock = re.split(' at | to ',text)
+                    if (clock[1].isdigit):
+                        hour = clock[1]
+                    else:
+                        hour = w2n.word_to_num(clock[1])
+                    if (clock[2].isdigit):
+                        minute = clock[2]
+                    else:
+                        minute = w2n.word_to_num(clock[2])
                     cronString += str(minute)+" "+str(hour)+" * * 6"
                     weekdayString = "Saturday"
 
             elif "sunday" in text.lower():
                     text.replace("sunday","",1)
-                    clock = text.split("to")
-                    hour = w2n.word_to_num(clock[0])
-                    minute = w2n.word_to_num(clock[1])
+                    clock = re.split(' at | to ',text)
+                    if (clock[1].isdigit):
+                        hour = clock[1]
+                    else:
+                        hour = w2n.word_to_num(clock[1])
+                    if (clock[2].isdigit):
+                        minute = clock[2]
+                    else:
+                        minute = w2n.word_to_num(clock[2])
                     cronString += str(minute)+" "+str(hour)+" * * 0"
                     weekdayString = "Sunday"
 
