@@ -141,18 +141,37 @@ def handle(text, mic, profile):
 
             os.system("cd /home/pi && "+cronString)
 
-#    elif "today" in text.lower():
-#            clock = text.split("to")
-#            hour = w2n.word_to_num(clock[0])
-#            minute = w2n.word_to_num(clock[1])
-#            cronString += str(minute)+" "+str(hour)+" * * 0"
-#            cronString += ' /home/pi/.jasper/alarmScript.sh" | tee -a /var/spool/cron/crontabs/pi'
-#            print("cd /home/pi &&"+cronString)
-#            print(command)
-#            os.system(command)
-#            
-#            xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
-#            mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
+    elif "today" in text.lower():
+            command ='echo "/home/pi/.jasper/alarmScript.sh" | at ' 
+            clock = re.split(' at | to ',text)
+            if (clock[1].isalpha):
+                    command += str(w2n.word_to_num(clock[1]))
+            else:
+                    command += str(clock[1])
+            command += ":"
+            if "am" in text:
+                onlynum = re.sub(" am","",clock[2])
+            elif "AM" in text:
+                onlynum = re.sub(" AM","",clock[2])
+            elif "pm" in text:
+                onlynum = re.sub(" pm","",clock[2])
+            elif "PM" in text:
+                onlynum = re.sub(" PM","",clock[2])
+            if (onlynum.isalpha):
+                    command += str(w2n.word_to_num(onlynum))
+            else:
+                    command += str(onlynum)
+            if "am" in text.lower():
+                clock[2].replace("am","",1)
+                command += " AM"
+            elif "pm" in text.lower():
+                clock[2].replace("pm","",1)
+                command += " PM"
+            print(command)
+            os.system(command)
+            
+            xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
+            mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
 #
 #    elif "in" in text.lower() and ("hours" in text.lower() or "hour" in text.lower()):
 #            hour = w2n.word_to_num(text)
