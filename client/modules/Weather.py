@@ -131,6 +131,7 @@ def handle(text, mic, profile):
         weather = cw.get_weather()
         weather_report = getWeatherReport(weather,loc,temp_unit,report='current')
         mic.say(weather_report)
+        # POST the weather_report here
 
     elif re.search(r'\b(TOMORROWS|TOMORROW)\b',text,re.IGNORECASE):
         forecast = owm.daily_forecast(city_name)
