@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 #open in http://127.0.0.1:5000/
 @app.route('/')
-def index():
+def hello():
     return 'Hello world'
 
 #kalo mau test pake html file
