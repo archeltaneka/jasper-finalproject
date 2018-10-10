@@ -10,25 +10,23 @@ from word2number import w2n
 WORDS = []
 
 def handle(text, mic, profile):
-    messages1 = ["Naturally Sir ","Of course Sir "]
-
-    final = random.choice(messages1)
-    mic.say(final)
+    mic.say("What time did you want the alarm?")
+    alarm = mic.activeListen()
     
     cronString = 'echo "'
 
-    text.replace("at  ","",1)
+    alarm.replace("at  ","",1)
     global weekdayString
     global hour
     global minute
     global clock
     global hourString
 
-    if "every" in text.lower():
+    if "every" in alarm.lower():
 
-            if "monday" in text.lower():
-                    text.replace("monday","",1)
-                    clock = re.split(' at | to ',text)
+            if "monday" in alarm.lower():
+                    alarm.replace("monday","",1)
+                    clock = re.split(' at |:',alarm)
                     if (clock[1].isdigit):
                         hour = clock[1]
                     else:
@@ -40,9 +38,9 @@ def handle(text, mic, profile):
                     cronString += str(minute)+" "+str(hour)+" * * 1"
                     weekdayString = "Monday"
 
-            elif "tuesday" in text.lower():
-                    text.replace("wednesday","",1)
-                    clock = re.split(' at | to ',text)
+            elif "tuesday" in alarm.lower():
+                    alarm.replace("wednesday","",1)
+                    clock = re.split(' at |:',alarm)
                     if (clock[1].isdigit):
                         hour = clock[1]
                     else:
@@ -54,9 +52,9 @@ def handle(text, mic, profile):
                     cronString += str(minute)+" "+str(hour)+" * * 3"
                     weekdayString = "Wednesday"
 
-            elif "wednesday" in text.lower():
-                    text.replace("wednesday","",1)
-                    clock = re.split(' at | to ',text)
+            elif "wednesday" in alarm.lower():
+                    alarm.replace("wednesday","",1)
+                    clock = re.split(' at |:',alarm)
                     if (clock[1].isdigit):
                         hour = clock[1]
                     else:
@@ -68,9 +66,9 @@ def handle(text, mic, profile):
                     cronString += str(minute)+" "+str(hour)+" * * 3"
                     weekdayString = "Wednesday"
 
-            elif "thursday" in text.lower():
-                    text.replace("thursday","",1)
-                    clock = re.split(' at | to ',text)
+            elif "thursday" in alarm.lower():
+                    alarm.replace("thursday","",1)
+                    clock = re.split(' at |:',alarm)
                     if (clock[1].isdigit):
                         hour = clock[1]
                     else:
@@ -82,9 +80,9 @@ def handle(text, mic, profile):
                     cronString += str(minute)+" "+str(hour)+" * * 4"
                     weekdayString = "Thursday"
 
-            elif "friday" in text.lower():
-                    text.replace("friday","",1)
-                    clock = re.split(' at | to ',text)
+            elif "friday" in alarm.lower():
+                    alarm.replace("friday","",1)
+                    clock = re.split(' at |:',alarm)
                     if (clock[1].isdigit):
                         hour = clock[1]
                     else:
@@ -96,9 +94,9 @@ def handle(text, mic, profile):
                     cronString += str(minute)+" "+str(hour)+" * * 5"
                     weekdayString = "Friday"
 
-            elif "saturday" in text.lower():  
-                    text.replace("saturday","",1)
-                    clock = re.split(' at | to ',text)
+            elif "saturday" in alarm.lower():  
+                    alarm.replace("saturday","",1)
+                    clock = re.split(' at |:',alarm)
                     if (clock[1].isdigit):
                         hour = clock[1]
                     else:
@@ -110,9 +108,9 @@ def handle(text, mic, profile):
                     cronString += str(minute)+" "+str(hour)+" * * 6"
                     weekdayString = "Saturday"
 
-            elif "sunday" in text.lower():
-                    text.replace("sunday","",1)
-                    clock = re.split(' at | to ',text)
+            elif "sunday" in alarm.lower():
+                    alarm.replace("sunday","",1)
+                    clock = re.split(' at |:',alarm)
                     if (clock[1].isdigit):
                         hour = clock[1]
                     else:
@@ -128,7 +126,7 @@ def handle(text, mic, profile):
                     sys.exit(1)
 
             cronString += ' /home/pi/.jasper/alarmScript.sh" | tee -a /var/spool/cron/crontabs/pi'
-            print("cd /home/pi &&"+cronString)
+            print("cd /home/pi && "+cronString)
 
             if hour > 12:
                 hourInt = int(hour)
@@ -141,30 +139,30 @@ def handle(text, mic, profile):
 
             os.system("cd /home/pi && "+cronString)
 
-    elif "today" in text.lower():
+    elif "today" in alarm.lower():
             command ='echo "/home/pi/.jasper/alarmScript.sh" | at ' 
-            clock = re.split(' at | to ',text)
+            clock = re.split(' at |:',alarm)
             if (clock[1].isalpha):
                     command += str(w2n.word_to_num(clock[1]))
             else:
                     command += str(clock[1])
             command += ":"
-            if "am" in text:
+            if "am" in alarm:
                 onlynum = re.sub(" am","",clock[2])
-            elif "AM" in text:
+            elif "AM" in alarm:
                 onlynum = re.sub(" AM","",clock[2])
-            elif "pm" in text:
+            elif "pm" in alarm:
                 onlynum = re.sub(" pm","",clock[2])
-            elif "PM" in text:
+            elif "PM" in alarm:
                 onlynum = re.sub(" PM","",clock[2])
             if (onlynum.isalpha):
                     command += str(w2n.word_to_num(onlynum))
             else:
                     command += str(onlynum)
-            if "am" in text.lower():
+            if "am" in alarm.lower():
                 clock[2].replace("am","",1)
                 command += " AM"
-            elif "pm" in text.lower():
+            elif "pm" in alarm.lower():
                 clock[2].replace("pm","",1)
                 command += " PM"
             print(command)
@@ -172,17 +170,6 @@ def handle(text, mic, profile):
             
             xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
             mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
-#
-#    elif "in" in text.lower() and ("hours" in text.lower() or "hour" in text.lower()):
-#            hour = w2n.word_to_num(text)
-#            command ='echo "/home/pi/.jasper/jamesAlarm.py" |at now + ' 
-#            command += hour
-#            command += " hours"
-#            print(command)
-#            os.system(command)
-#            
-#            xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
-#            mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
 
 def isValid(text):
     return bool(re.search(r'\b(((add|set) (a|another|an) (alarm|clock)|wake me))\b', text, re.IGNORECASE))
