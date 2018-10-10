@@ -27,98 +27,56 @@ def handle(text, mic, profile):
             if "monday" in alarm.lower():
                     alarm.replace("monday","",1)
                     clock = re.split(' at |:',alarm)
-                    if (clock[1].isdigit):
-                        hour = clock[1]
-                    else:
-                        hour = w2n.word_to_num(clock[1])
-                    if (clock[2].isdigit):
-                        minute = clock[2]
-                    else:
-                        minute = w2n.word_to_num(clock[2])
+                    hour = clock[1]
+                    minute = clock[2]
                     cronString += str(minute)+" "+str(hour)+" * * 1"
                     weekdayString = "Monday"
 
             elif "tuesday" in alarm.lower():
                     alarm.replace("wednesday","",1)
                     clock = re.split(' at |:',alarm)
-                    if (clock[1].isdigit):
-                        hour = clock[1]
-                    else:
-                        hour = w2n.word_to_num(clock[1])
-                    if (clock[2].isdigit):
-                        minute = clock[2]
-                    else:
-                        minute = w2n.word_to_num(clock[2])
+                    hour = clock[1]
+                    minute = clock[2]
                     cronString += str(minute)+" "+str(hour)+" * * 3"
                     weekdayString = "Wednesday"
 
             elif "wednesday" in alarm.lower():
                     alarm.replace("wednesday","",1)
                     clock = re.split(' at |:',alarm)
-                    if (clock[1].isdigit):
-                        hour = clock[1]
-                    else:
-                        hour = w2n.word_to_num(clock[1])
-                    if (clock[2].isdigit):
-                        minute = clock[2]
-                    else:
-                        minute = w2n.word_to_num(clock[2])
+                    hour = clock[1]
+                    minute = clock[2]
                     cronString += str(minute)+" "+str(hour)+" * * 3"
                     weekdayString = "Wednesday"
 
             elif "thursday" in alarm.lower():
                     alarm.replace("thursday","",1)
                     clock = re.split(' at |:',alarm)
-                    if (clock[1].isdigit):
-                        hour = clock[1]
-                    else:
-                        hour = w2n.word_to_num(clock[1])
-                    if (clock[2].isdigit):
-                        minute = clock[2]
-                    else:
-                        minute = w2n.word_to_num(clock[2])
+                    hour = clock[1]
+                    minute = clock[2]
                     cronString += str(minute)+" "+str(hour)+" * * 4"
                     weekdayString = "Thursday"
 
             elif "friday" in alarm.lower():
                     alarm.replace("friday","",1)
                     clock = re.split(' at |:',alarm)
-                    if (clock[1].isdigit):
-                        hour = clock[1]
-                    else:
-                        hour = w2n.word_to_num(clock[1])
-                    if (clock[2].isdigit):
-                        minute = clock[2]
-                    else:
-                        minute = w2n.word_to_num(clock[2])
+                    hour = clock[1]
+                    minute = clock[2]
                     cronString += str(minute)+" "+str(hour)+" * * 5"
                     weekdayString = "Friday"
 
             elif "saturday" in alarm.lower():  
                     alarm.replace("saturday","",1)
                     clock = re.split(' at |:',alarm)
-                    if (clock[1].isdigit):
-                        hour = clock[1]
-                    else:
-                        hour = w2n.word_to_num(clock[1])
-                    if (clock[2].isdigit):
-                        minute = clock[2]
-                    else:
-                        minute = w2n.word_to_num(clock[2])
+                    hour = clock[1]
+                    minute = clock[2]
                     cronString += str(minute)+" "+str(hour)+" * * 6"
                     weekdayString = "Saturday"
 
             elif "sunday" in alarm.lower():
                     alarm.replace("sunday","",1)
                     clock = re.split(' at |:',alarm)
-                    if (clock[1].isdigit):
-                        hour = clock[1]
-                    else:
-                        hour = w2n.word_to_num(clock[1])
-                    if (clock[2].isdigit):
-                        minute = clock[2]
-                    else:
-                        minute = w2n.word_to_num(clock[2])
+                    hour = clock[1]
+                    minute = clock[2]
                     cronString += str(minute)+" "+str(hour)+" * * 0"
                     weekdayString = "Sunday"
 
@@ -142,10 +100,7 @@ def handle(text, mic, profile):
     elif "today" in alarm.lower():
             command ='echo "/home/pi/.jasper/alarmScript.sh" | at ' 
             clock = re.split(' at |:',alarm)
-            if (clock[1].isalpha):
-                    command += str(w2n.word_to_num(clock[1]))
-            else:
-                    command += str(clock[1])
+            command += str(clock[1])
             command += ":"
             if "am" in alarm:
                 onlynum = re.sub(" am","",clock[2])
@@ -155,10 +110,7 @@ def handle(text, mic, profile):
                 onlynum = re.sub(" pm","",clock[2])
             elif "PM" in alarm:
                 onlynum = re.sub(" PM","",clock[2])
-            if (onlynum.isalpha):
-                    command += str(w2n.word_to_num(onlynum))
-            else:
-                    command += str(onlynum)
+            command += str(onlynum)
             if "am" in alarm.lower():
                 clock[2].replace("am","",1)
                 command += " AM"
