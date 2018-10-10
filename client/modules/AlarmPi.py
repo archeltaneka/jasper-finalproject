@@ -27,56 +27,119 @@ def handle(text, mic, profile):
             if "monday" in alarm.lower():
                     alarm.replace("monday","",1)
                     clock = re.split(' at |:',alarm)
-                    hour = clock[1]
-                    minute = clock[2]
+                    firsthour = clock[1]
+                    if "a.m." in alarm:
+                        minute = re.sub(" a.m.","",clock[2])
+                    elif "A.M." in alarm:
+                        minute = re.sub(" A.M.","",clock[2])
+                    elif "p.m." in alarm:
+                        minute = re.sub(" p.m.","",clock[2])
+                        hour = int(firsthour)+12
+                    elif "P.M." in alarm:
+                        minute = re.sub(" P.M.","",clock[2])
+                        hour = int(firsthour)+12
                     cronString += str(minute)+" "+str(hour)+" * * 1"
                     weekdayString = "Monday"
 
             elif "tuesday" in alarm.lower():
                     alarm.replace("wednesday","",1)
                     clock = re.split(' at |:',alarm)
-                    hour = clock[1]
-                    minute = clock[2]
+                    firsthour = clock[1]
+                    if "a.m." in alarm:
+                        minute = re.sub(" a.m.","",clock[2])
+                    elif "A.M." in alarm:
+                        minute = re.sub(" A.M.","",clock[2])
+                    elif "p.m." in alarm:
+                        minute = re.sub(" p.m.","",clock[2])
+                        hour = int(firsthour)+12
+                    elif "P.M." in alarm:
+                        minute = re.sub(" P.M.","",clock[2])
+                        hour = int(firsthour)+12
                     cronString += str(minute)+" "+str(hour)+" * * 3"
                     weekdayString = "Wednesday"
 
             elif "wednesday" in alarm.lower():
                     alarm.replace("wednesday","",1)
                     clock = re.split(' at |:',alarm)
-                    hour = clock[1]
-                    minute = clock[2]
+                    firsthour = clock[1]
+                    if "a.m." in alarm:
+                        minute = re.sub(" a.m.","",clock[2])
+                    elif "A.M." in alarm:
+                        minute = re.sub(" A.M.","",clock[2])
+                    elif "p.m." in alarm:
+                        minute = re.sub(" p.m.","",clock[2])
+                        hour = int(firsthour)+12
+                    elif "P.M." in alarm:
+                        minute = re.sub(" P.M.","",clock[2])
+                        hour = int(firsthour)+12
                     cronString += str(minute)+" "+str(hour)+" * * 3"
                     weekdayString = "Wednesday"
 
             elif "thursday" in alarm.lower():
                     alarm.replace("thursday","",1)
                     clock = re.split(' at |:',alarm)
-                    hour = clock[1]
-                    minute = clock[2]
+                    firsthour = clock[1]
+                    if "a.m." in alarm:
+                        minute = re.sub(" a.m.","",clock[2])
+                    elif "A.M." in alarm:
+                        minute = re.sub(" A.M.","",clock[2])
+                    elif "p.m." in alarm:
+                        minute = re.sub(" p.m.","",clock[2])
+                        hour = int(firsthour)+12
+                    elif "P.M." in alarm:
+                        minute = re.sub(" P.M.","",clock[2])
+                        hour = int(firsthour)+12
                     cronString += str(minute)+" "+str(hour)+" * * 4"
                     weekdayString = "Thursday"
 
             elif "friday" in alarm.lower():
                     alarm.replace("friday","",1)
                     clock = re.split(' at |:',alarm)
-                    hour = clock[1]
-                    minute = clock[2]
+                    firsthour = clock[1]
+                    if "a.m." in alarm:
+                        minute = re.sub(" a.m.","",clock[2])
+                    elif "A.M." in alarm:
+                        minute = re.sub(" A.M.","",clock[2])
+                    elif "p.m." in alarm:
+                        minute = re.sub(" p.m.","",clock[2])
+                        hour = int(firsthour)+12
+                    elif "P.M." in alarm:
+                        minute = re.sub(" P.M.","",clock[2])
+                        hour = int(firsthour)+12
                     cronString += str(minute)+" "+str(hour)+" * * 5"
                     weekdayString = "Friday"
 
             elif "saturday" in alarm.lower():  
                     alarm.replace("saturday","",1)
                     clock = re.split(' at |:',alarm)
-                    hour = clock[1]
-                    minute = clock[2]
+                    firsthour = clock[1]
+                    if "a.m." in alarm:
+                        minute = re.sub(" a.m.","",clock[2])
+                    elif "A.M." in alarm:
+                        minute = re.sub(" A.M.","",clock[2])
+                    elif "p.m." in alarm:
+                        minute = re.sub(" p.m.","",clock[2])
+                        hour = int(firsthour)+12
+                    elif "P.M." in alarm:
+                        minute = re.sub(" P.M.","",clock[2])
+                        hour = int(firsthour)+12
                     cronString += str(minute)+" "+str(hour)+" * * 6"
                     weekdayString = "Saturday"
 
             elif "sunday" in alarm.lower():
                     alarm.replace("sunday","",1)
                     clock = re.split(' at |:',alarm)
-                    hour = clock[1]
-                    minute = clock[2]
+                    firsthour = clock[1]
+                    if "a.m." in alarm:
+                        minute = re.sub(" a.m.","",clock[2])
+                    elif "A.M." in alarm:
+                        minute = re.sub(" A.M.","",clock[2])
+                    elif "p.m." in alarm:
+                        minute = re.sub(" p.m.","",clock[2])
+                        hour = int(firsthour)+12
+                    elif "P.M." in alarm:
+                        minute = re.sub(" P.M.","",clock[2])
+                        hour = int(firsthour)+12
                     cronString += str(minute)+" "+str(hour)+" * * 0"
                     weekdayString = "Sunday"
 
@@ -102,20 +165,18 @@ def handle(text, mic, profile):
             clock = re.split(' at |:',alarm)
             command += str(clock[1])
             command += ":"
-            if "am" in alarm:
-                onlynum = re.sub(" am","",clock[2])
-            elif "AM" in alarm:
-                onlynum = re.sub(" AM","",clock[2])
-            elif "pm" in alarm:
-                onlynum = re.sub(" pm","",clock[2])
-            elif "PM" in alarm:
-                onlynum = re.sub(" PM","",clock[2])
+            if "a.m." in alarm:
+                onlynum = re.sub(" a.m.","",clock[2])
+            elif "A.M." in alarm:
+                onlynum = re.sub(" A.M.","",clock[2])
+            elif "p.m." in alarm:
+                onlynum = re.sub(" p.m.","",clock[2])
+            elif "P.M." in alarm:
+                onlynum = re.sub(" P.M.","",clock[2])
             command += str(onlynum)
-            if "am" in alarm.lower():
-                clock[2].replace("am","",1)
+            if "a.m." in alarm.lower():
                 command += " AM"
-            elif "pm" in alarm.lower():
-                clock[2].replace("pm","",1)
+            elif "p.m." in alarm.lower():
                 command += " PM"
             print(command)
             os.system(command)
