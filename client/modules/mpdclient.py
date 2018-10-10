@@ -5,6 +5,8 @@ import logging
 import socket
 import mpd
 
+WORDS = []
+
 Song = collections.namedtuple('Song', ['id', 'title', 'artist', 'album'])
 
 PLAYBACK_STATE_PLAYING = 1
