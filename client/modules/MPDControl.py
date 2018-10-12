@@ -39,7 +39,7 @@ def handle(text, mic, profile):
     mic.say("Please give me a moment, I'm loading your Spotify playlists.")
 
     # FIXME: Make this configurable
-    persona = 'JASPER'
+    persona = 'JARVIS'
 
     logger.debug("Starting music mode")
     music_mode = MusicMode(persona, mic, mpdwrapper)
