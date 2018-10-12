@@ -36,7 +36,7 @@ def handle(text, mic, profile):
                 minute = re.sub(" p.m.","",clock[2])
                 hour = int(firsthour)+12
             elif "P.M." in alarm:
-                minute = re.sub(" P.M.","",clock[2])
+#                minute = re.sub(" P.M.","",clock[2])
                 hour = int(firsthour)+12
             cronString += str(minute)+" "+str(hour)+" * * 1"
             weekdayString = "Monday"
@@ -53,7 +53,7 @@ def handle(text, mic, profile):
                 minute = re.sub(" p.m.","",clock[2])
                 hour = int(firsthour)+12
             elif "P.M." in alarm:
-                minute = re.sub(" P.M.","",clock[2])
+#                minute = re.sub(" P.M.","",clock[2])
                 hour = int(firsthour)+12
             cronString += str(minute)+" "+str(hour)+" * * 3"
             weekdayString = "Tuesday"
@@ -70,7 +70,7 @@ def handle(text, mic, profile):
                 minute = re.sub(" p.m.","",clock[2])
                 hour = int(firsthour)+12
             elif "P.M." in alarm:
-                minute = re.sub(" P.M.","",clock[2])
+#                minute = re.sub(" P.M.","",clock[2])
                 hour = int(firsthour)+12
             cronString += str(minute)+" "+str(hour)+" * * 3"
             weekdayString = "Wednesday"
@@ -87,7 +87,7 @@ def handle(text, mic, profile):
                 minute = re.sub(" p.m.","",clock[2])
                 hour = int(firsthour)+12
             elif "P.M." in alarm:
-                minute = re.sub(" P.M.","",clock[2])
+#                minute = re.sub(" P.M.","",clock[2])
                 hour = int(firsthour)+12
             cronString += str(minute)+" "+str(hour)+" * * 4"
             weekdayString = "Thursday"
@@ -104,7 +104,7 @@ def handle(text, mic, profile):
                 minute = re.sub(" p.m.","",clock[2])
                 hour = int(firsthour)+12
             elif "P.M." in alarm:
-                minute = re.sub(" P.M.","",clock[2])
+#                minute = re.sub(" P.M.","",clock[2])
                 hour = int(firsthour)+12
             cronString += str(minute)+" "+str(hour)+" * * 5"
             weekdayString = "Friday"
@@ -121,7 +121,7 @@ def handle(text, mic, profile):
                 minute = re.sub(" p.m.","",clock[2])
                 hour = int(firsthour)+12
             elif "P.M." in alarm:
-                minute = re.sub(" P.M.","",clock[2])
+#                minute = re.sub(" P.M.","",clock[2])
                 hour = int(firsthour)+12
             cronString += str(minute)+" "+str(hour)+" * * 6"
             weekdayString = "Saturday"
@@ -138,7 +138,7 @@ def handle(text, mic, profile):
                 minute = re.sub(" p.m.","",clock[2])
                 hour = int(firsthour)+12
             elif "P.M." in alarm:
-                minute = re.sub(" P.M.","",clock[2])
+#                minute = re.sub(" P.M.","",clock[2])
                 hour = int(firsthour)+12
             cronString += str(minute)+" "+str(hour)+" * * 0"
             weekdayString = "Sunday"
@@ -162,8 +162,8 @@ def handle(text, mic, profile):
 
     elif "today" in alarm.lower():
         command ='echo "/home/pi/.jasper/alarmScript.sh" | at ' 
-        clock = re.split(' at |:',alarm)
-        command += str(clock[1])
+        clock = re.split(' AT |:| P.M.',alarm)
+        command += clock[1]
         command += ":"
         if "a.m." in alarm:
             onlynum = re.sub(" a.m.","",clock[2])
@@ -171,9 +171,9 @@ def handle(text, mic, profile):
             onlynum = re.sub(" A.M.","",clock[2])
         elif "p.m." in alarm:
             onlynum = re.sub(" p.m.","",clock[2])
-        elif "P.M." in alarm:
-            onlynum = re.sub(" P.M.","",clock[2])
-        command += str(onlynum)
+ #       elif "P.M." in alarm:
+ #           onlynum = re.sub(" P.M.","",clock[2])
+        command += clock[2]
         if "a.m." in alarm.lower():
             command += " AM"
         elif "p.m." in alarm.lower():
@@ -181,7 +181,7 @@ def handle(text, mic, profile):
         print(command)
         os.system(command)
         
-        xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
+        xHoursFromNow = datetime.now() + timedelta(hours=int(clock[1]))
         mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
     
     elif "everyday" in alarm.lower():
