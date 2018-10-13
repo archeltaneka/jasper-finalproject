@@ -26,10 +26,10 @@ def handle(text, mic, profile):
 
         if "monday" in alarm.lower():
             alarm.replace("monday","",1)     
-            if "a.m." in alarm.lower():
+            if "A.M." in alarm:
                 clock = re.split(' AT |:| A.M.',alarm)
                 hour = clock[1]
-            elif "p.m." in alarm.lower():
+            elif "P.M" in alarm:
                 clock = re.split(' AT |:| P.M.',alarm)
                 hour = int(clock[1])+12
             cronString += str(clock[2])+" "+str(hour)+" * * 1"
@@ -37,10 +37,10 @@ def handle(text, mic, profile):
 
         elif "tuesday" in alarm.lower():
             alarm.replace("wednesday","",1)
-            if "a.m." in alarm.lower():
+            if "A.M." in alarm:
                 clock = re.split(' AT |:| A.M.',alarm)
                 hour = clock[1]
-            elif "p.m." in alarm.lower():
+            elif "P.M" in alarm:
                 clock = re.split(' AT |:| P.M.',alarm)
                 hour = int(clock[1])+12
             cronString += str(clock[2])+" "+str(hour)+" * * 3"
@@ -48,10 +48,10 @@ def handle(text, mic, profile):
 
         elif "wednesday" in alarm.lower():
             alarm.replace("wednesday","",1)
-            if "a.m." in alarm.lower():
+            if "A.M." in alarm:
                 clock = re.split(' AT |:| A.M.',alarm)
                 hour = clock[1]
-            elif "p.m." in alarm.lower():
+            elif "P.M" in alarm:
                 clock = re.split(' AT |:| P.M.',alarm)
                 hour = int(clock[1])+12
             cronString += str(clock[2])+" "+str(hour)+" * * 3"
@@ -59,10 +59,10 @@ def handle(text, mic, profile):
 
         elif "thursday" in alarm.lower():
             alarm.replace("thursday","",1)
-            if "a.m." in alarm.lower():
+            if "A.M." in alarm:
                 clock = re.split(' AT |:| A.M.',alarm)
                 hour = clock[1]
-            elif "p.m." in alarm.lower():
+            elif "P.M" in alarm:
                 clock = re.split(' AT |:| P.M.',alarm)
                 hour = int(clock[1])+12
             cronString += str(clock[2])+" "+str(hour)+" * * 4"
@@ -70,10 +70,10 @@ def handle(text, mic, profile):
 
         elif "friday" in alarm.lower():
             alarm.replace("friday","",1)
-            if "a.m." in alarm.lower():
+            if "A.M." in alarm:
                 clock = re.split(' AT |:| A.M.',alarm)
                 hour = clock[1]
-            elif "p.m." in alarm.lower():
+            elif "P.M" in alarm:
                 clock = re.split(' AT |:| P.M.',alarm)
                 hour = int(clock[1])+12
             cronString += str(clock[2])+" "+str(hour)+" * * 5"
@@ -81,10 +81,10 @@ def handle(text, mic, profile):
 
         elif "saturday" in alarm.lower():  
             alarm.replace("saturday","",1)
-            if "a.m." in alarm.lower():
+            if "A.M." in alarm:
                 clock = re.split(' AT |:| A.M.',alarm)
                 hour = clock[1]
-            elif "p.m." in alarm.lower():
+            elif "P.M" in alarm:
                 clock = re.split(' AT |:| P.M.',alarm)
                 hour = int(clock[1])+12
             cronString += str(clock[2])+" "+str(hour)+" * * 6"
@@ -92,10 +92,10 @@ def handle(text, mic, profile):
 
         elif "sunday" in alarm.lower():
             alarm.replace("sunday","",1)
-            if "a.m." in alarm.lower():
+            if "A.M." in alarm:
                 clock = re.split(' AT |:| A.M.',alarm)
                 hour = clock[1]
-            elif "p.m." in alarm.lower():
+            elif "P.M" in alarm:
                 clock = re.split(' AT |:| P.M.',alarm)
                 hour = int(clock[1])+12
             cronString += str(clock[2])+" "+str(hour)+" * * 0"
@@ -120,13 +120,12 @@ def handle(text, mic, profile):
 
     elif "today" in alarm.lower():
         command ='echo "/home/pi/.jasper/alarmScript.sh" | at ' 
-        if "a.m." in alarm.lower():
+        if "A.M." in alarm:
             clock = re.split(' AT |:| A.M.',alarm)
             clockformat = " AM"
-        elif "p.m." in alarm.lower():
+        elif "P.M." in alarm:
             clock = re.split(' AT |:| P.M.',alarm)
             clockformat = " PM"
-        clock = re.split(' AT |:| P.M.',alarm)
         command += str(clock[1])
         command += ":"
         command += str(clock[2])
@@ -138,10 +137,10 @@ def handle(text, mic, profile):
         mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.clock[2])+". ")
     
     elif "everyday" in alarm.lower():
-        if "a.m." in alarm.lower():
+        if "A.M." in alarm:
             clock = re.split(' AT |:| A.M.',alarm)
             hour = clock[1]
-        elif "p.m." in alarm.lower():
+        elif "P.M." in alarm:
             clock = re.split(' AT |:| P.M.',alarm)
             hour = int(clock[1])+12
         cronString += str(clock[2])+" "+str(hour)+" * * *"
@@ -161,13 +160,12 @@ def handle(text, mic, profile):
 
     elif "tomorrow" in alarm.lower():
         command ='echo "/home/pi/.jasper/alarmScript.sh" | at ' 
-        if "a.m." in alarm.lower():
+        if "A.M." in alarm:
             clock = re.split(' AT |:| A.M.',alarm)
             clockformat = " AM"
-        elif "p.m." in alarm.lower():
+        elif "P.M." in alarm:
             clock = re.split(' AT |:| P.M.',alarm)
             clockformat = " PM"
-        clock = re.split(' AT |:| P.M.',alarm)
         command += str(clock[1])
         command += ":"
         command += str(clock[2])
