@@ -123,22 +123,10 @@ class Jasper(object):
 
 if __name__ == "__main__":
 
-<<<<<<< HEAD
-    print("*********************************************************")
-    print("*             JASPER - THE TALKING COMPUTER             *")
-    print("* (c) 2015 Shubhro Saha, Charlie Marsh & Jan Holthuis   *")
-    print("*********************************************************")
-||||||| merged common ancestors
-    print("*******************************************************")
-    print("*             JASPER - THE TALKING COMPUTER           *")
-    print("* (c) 2015 Shubhro Saha, Charlie Marsh & Jan Holthuis *")
-    print("*******************************************************")
-=======
     print("*********************************************************")
     print("*    JARVIS - Just A Rather Very Intelligent System     *")
     print("* (c) 2015 Shubhro Saha, Charlie Marsh & Jan Holthuis   *")
     print("*********************************************************")
->>>>>>> b4a97a2216b551be32f7e132341bcb082be868d1
     print("*And,Ang,Arc,Dyl,Eric,Ikh,Kez,Mik,Mir,Reg,Sef,Stel,Vero *")
     print("*********************************************************")
     print()
