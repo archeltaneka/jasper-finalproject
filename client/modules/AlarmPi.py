@@ -9,6 +9,9 @@ from word2number import w2n
 
 WORDS = []
 
+def hasNumbers(inputString):
+    return bool(re.search(r'\d', inputString))
+
 def possibleinput(alarm):
     global i
     global clock
@@ -27,6 +30,11 @@ def possibleinput(alarm):
             clockformat = " AM"
             hour = clock[1]
             minute = clock[2]
+        elif hasNumbers(alarm):
+            clock = re.split(' AT |:| A.M.',alarm)
+            clockformat = " PM"
+            hour = clock[1]
+            minute = "00"
         else:
             clock = re.split(r' AT |\s|',alarm)
             clockformat = " AM"
@@ -41,6 +49,11 @@ def possibleinput(alarm):
             clockformat = " PM"
             hour = clock[1]
             minute = clock[2]
+        elif hasNumbers(alarm):
+            clock = re.split(' AT |:| P.M.',alarm)
+            clockformat = " PM"
+            hour = clock[1]
+            minute = "00"
         else:
             clock = re.split(r' AT |\s',alarm)
             clockformat = " PM"
