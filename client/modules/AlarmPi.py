@@ -128,7 +128,7 @@ def handle(text, mic, profile):
         else :
             sys.exit(1)
 
-        cronString += ' /home/pi/.jasper/alarmScript.sh" | tee -a /var/spool/cron/crontabs/pi'
+        cronString += ' sudo sh /home/pi/.jasper/AlarmScriptShell/incvolume.sh && sudo sh /home/pi/.jasper/AlarmScriptShell/play.sh" | sudo tee -a /var/spool/cron/crontabs/pi'
         print("cd /home/pi && "+cronString)
 
         if int(hour) > 12:
@@ -143,7 +143,7 @@ def handle(text, mic, profile):
         os.system("cd /home/pi && "+cronString)
 
     elif "today" in alarm.lower():
-        command ='echo "/home/pi/.jasper/alarmScript.sh" | at ' 
+        command ='echo "sudo sh /home/pi/.jasper/AlarmScriptShell/incvolume.sh && sudo sh /home/pi/.jasper/AlarmScriptShell/play.sh" | at ' 
         hour, minute, clockformat = possibleinput(alarm)
         command += str(hour)
         command += ":"
@@ -158,7 +158,7 @@ def handle(text, mic, profile):
     elif "everyday" in alarm.lower():
         hour, minute = possibleinput(alarm)
         cronString += str(minute)+" "+str(hour)+" * * *"
-        cronString += ' /home/pi/.jasper/alarmScript.sh" | tee -a /var/spool/cron/crontabs/pi'
+        cronString += ' sudo sh /home/pi/.jasper/AlarmScriptShell/incvolume.sh && sudo sh /home/pi/.jasper/AlarmScriptShell/play.sh" | tee -a /var/spool/cron/crontabs/pi'
         print("cd /home/pi && "+cronString)
 
         if hour > 12:
@@ -173,7 +173,7 @@ def handle(text, mic, profile):
         os.system("cd /home/pi && "+cronString)
 
     elif "tomorrow" in alarm.lower():
-        command ='echo "/home/pi/.jasper/alarmScript.sh" | at ' 
+        command ='echo "sudo sh /home/pi/.jasper/AlarmScriptShell/incvolume.sh && sudo sh /home/pi/.jasper/AlarmScriptShell/play.sh" | at ' 
         hour, minute, clockformat = possibleinput(alarm)
         command += str(hour)
         command += ":"
