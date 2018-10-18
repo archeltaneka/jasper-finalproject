@@ -6,22 +6,6 @@ import requests
 
 WORDS = ["TURN", "ON", "LIGHT"]
 
-##app = Flask(__name__)
-##
-##@app.route("/lighton")
-##def lightOn():
-##        try:
-##                GPIO.setmode(GPIO.BCM)
-##                GPIO.setup(18, GPIO.OUT)
-##                GPIO.output(18, GPIO.HIGH)
-##                response = {"status": "light on"}
-##        except:
-##                response = {"status": "light already turned on"}
-##
-##        return jsonify(response)
-
-##app.run(debug=True, host='0.0.0.0')
-
 def handle(text, mic, profile):
 
 	GPIO.setmode(GPIO.BCM)
@@ -40,8 +24,8 @@ def handle(text, mic, profile):
 	mic.say(message)
 
 	# POST light status here
-	payload = {'status': 'light on'}
-	r = requests.post("http://127.0.0.1:5000/try", params=payload)
+	message = {'status': 'Light on'}
+	r = requests.post("http://178.128.62.29/api/device/lighton", params=message)
 
 def isValid(text):
 	return bool(re.search(r'\b(turn on light|turn on the light|light on|lights on)\b', text, re.IGNORECASE))

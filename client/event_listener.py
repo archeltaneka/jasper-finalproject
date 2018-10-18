@@ -1,37 +1,25 @@
-from socketIO_client import SocketIO, LoggingNamespace, BaseNamespace
+import thread
+import time
+import requests
+import RPi.GPIO as GPIO
 
-class ConnectionSpace(BaseNamespace):
-    def on_connect(self):
-        print('[Connected]')
+def check_light_status(threadName, delay):
+    count = 0
+    while count < float('inf'):
+        r = requests.get('http://178.128.62.29/api/device/stat')
+        data = r.json()
+        time.sleep(delay)
+        count += 1
+        if data['light']['status'] == 'Light on':
+##            GPIO.setmode(GPIO.BCM)
+##            GPIO.setup(18, GPIO.OUT)
+##            GPIO.output(18, GPIO.HIGH)
+            print("Light on!")
+        else:
+##            GPIO.setmode(GPIO.BCM)
+##            GPIO.output(18, GPIO.LOW)
+##            GPIO.cleanup()
+            print("Light off!")
 
-    def on_reconnect(self):
-        print('[Reconnected]')
+check_light_status("Light: ", 4)
 
-    def on_disconnect(self):
-        print('[Disconnected]')
-
-class LightOnSpace(BaseNamespace):
-    def handle(self, *args):
-        print('Light On', args)
-        # LIGHT ON
-
-class LightOffSpace(BaseNamespace):
-    def handle(self, *args):
-        print('Light Off', args)
-        # LIGHT OFF
-
-socketIO = SocketIO('', 8000, ConnectionSpace)
-
-# Define namespaces
-lighton_namespace = socketIO.define(LightOnSpace, '/lighton')
-lightoff_namespace = socketIO.define(LightOffSpace, '/lightoff')
-
-# Emit events
-lighton_namespace.emit('Light on!')
-lightoff_namespace.emit('Light off!')
-socketIO.wait()
-
-# Listen for events
-socketIO.on('Light on!', LightOnSpace)
-socketIO.wait()
-        

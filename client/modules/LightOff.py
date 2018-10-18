@@ -13,11 +13,11 @@ def handle(text, mic, profile):
 	GPIO.cleanup()
 
 	#suruh jasper jwb lampunya ud nyala
-	message = "light off"
+	message = "Light off"
 	mic.say(message)
 	# POST light status here
 	payload = {'status': 'light off'}
-	r = requests.post("http://127.0.0.1:5000/try", params=payload)
+	r = requests.post("http://178.128.62.29/api/device/lightoff", params=payload)
 
 def isValid(text):
 	return bool(re.search(r'\b(turn off light|turn off the light|light off|lights off)\b', text, re.IGNORECASE))
