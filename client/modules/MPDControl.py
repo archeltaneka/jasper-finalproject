@@ -280,7 +280,7 @@ class MPDWrapper(object):
         item = self.client.playlistinfo(int(self.client.status()["song"]))[0]
 ##        item = self.client.currentsong()
         result = "%s by %s" % (item["title"], item["artist"])
-        return item
+        return result
 
     @reconnect
     def volume(self, level=None, interval=None):
