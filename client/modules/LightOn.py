@@ -8,7 +8,7 @@ WORDS = ["TURN", "ON", "LIGHT"]
 
 def handle(text, mic, profile):
 
-	GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BCM)
 	
 	#setting up the pin to be a pin that outputs information
 	GPIO.setup(18, GPIO.OUT)
@@ -24,8 +24,8 @@ def handle(text, mic, profile):
 	mic.say(message)
 
 	# POST light status here
-	message = {'status': 'Light on'}
-	r = requests.post("http://178.128.62.29/api/device/lighton", params=message)
+	payload = {'status': 'light on'}
+	r = requests.post("http://178.128.62.29/api/device/lighton", params=payload)
 
 def isValid(text):
 	return bool(re.search(r'\b(turn on light|turn on the light|light on|lights on)\b', text, re.IGNORECASE))
