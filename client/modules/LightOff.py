@@ -1,6 +1,7 @@
 import re
 import RPi.GPIO as GPIO
 import time
+import requests
 
 WORDS = ["TURN", "OFF", "LIGHT"]
 
