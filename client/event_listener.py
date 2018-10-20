@@ -3,6 +3,7 @@ import time
 import requests
 import subprocess
 import RPi.GPIO as GPIO
+from py_irsend import irsend
 
 def check_light_status(threadName, delay):
     count = 0
@@ -21,7 +22,12 @@ def check_light_status(threadName, delay):
 ##            GPIO.cleanup()
             print('Light off!')
         if data['tv']['status'] == 'tv on' or data['tv']['status'] == 'tv off':
-            rtn = subprocess.call(["irsend", "SEND_ONCE", "/home/pi/lircd.conf", "KEY_POWER"])
+##            rtn = subprocess.call(["irsend", "SEND_ONCE", "/home/pi/lircd.conf", "KEY_POWER"])
+              irsend.send_once('/home/pi/lircd.conf', ['KEY_POWER'])
+              if data['tv']['status'] == 'tv on':
+                  print("TV on!")
+              elif data['tv']['status'] == 'tv off':
+                  print("TV off!")
 
 check_light_status("Device", 1)
 

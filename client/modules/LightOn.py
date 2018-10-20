@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 import time
 import requests
 
-WORDS = ["TURN", "ON", "LIGHT"]
+WORDS = ["LIGHT", "LIGHTS", "TURN ON LIGHT", "TURN ON THE LIGHT", "LIGHT ON", "LIGHTS ON"]
 
 def handle(text, mic, profile):
 
@@ -28,4 +28,5 @@ def handle(text, mic, profile):
 	r = requests.post("http://178.128.62.29/api/device/lighton", params=payload)
 
 def isValid(text):
-	return bool(re.search(r'\b(turn on light|turn on the light|light on|lights on)\b', text, re.IGNORECASE))
+##	return bool(re.search(r'\b(turn on light|turn on the light|light on|lights on)\b', text, re.IGNORECASE))
+        return any(word in text.upper() for word in WORDS)
