@@ -1,25 +1,33 @@
 import thread
 import time
 import requests
+import subprocess
 import RPi.GPIO as GPIO
+from py_irsend import irsend
 
 def check_light_status(threadName, delay):
     count = 0
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(18, GPIO.OUT)
     while count < float('inf'):
         r = requests.get('http://178.128.62.29/api/device/stat')
         data = r.json()
         time.sleep(delay)
         count += 1
-        if data['light']['status'] == 'Light on':
-##            GPIO.setmode(GPIO.BCM)
-##            GPIO.setup(18, GPIO.OUT)
-##            GPIO.output(18, GPIO.HIGH)
-            print("Light on!")
-        else:
-##            GPIO.setmode(GPIO.BCM)
-##            GPIO.output(18, GPIO.LOW)
+        if data['light']['status'] == 'light on':
+            GPIO.output(18, GPIO.HIGH)
+            print('Light on!')
+        if data['light']['status'] == 'light off':
+            GPIO.output(18, GPIO.LOW)
 ##            GPIO.cleanup()
-            print("Light off!")
+            print('Light off!')
+        if data['tv']['status'] == 'tv on' or data['tv']['status'] == 'tv off':
+##            rtn = subprocess.call(["irsend", "SEND_ONCE", "/home/pi/lircd.conf", "KEY_POWER"])
+              irsend.send_once('/home/pi/lircd.conf', ['KEY_POWER'])
+              if data['tv']['status'] == 'tv on':
+                  print("TV on!")
+              elif data['tv']['status'] == 'tv off':
+                  print("TV off!")
 
-check_light_status("Light: ", 4)
+check_light_status("Device", 1)
 
