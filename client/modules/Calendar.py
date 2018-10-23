@@ -62,7 +62,8 @@ def addEvent(profile, mic, service):
             if bool(re.search(r'\bYes\b', mic.activeListen(), re.IGNORECASE)):
                 mic.say("Okay, it's on your calendar")
                 # POST request for req here
-                
+                payload = {'user_id':3, 'event':ev, 'date':dt, 'time':tm}
+                r = requests.post("http://178.128.62.29/api/schedule/createNew", params=payload)
             else:
                 mic.say("My mistake, english is my second language.")
                 service.events().delete(calendarId='primary', eventId=createdEvent['id']).execute()
