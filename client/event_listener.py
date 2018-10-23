@@ -7,6 +7,7 @@ from py_irsend import irsend
 
 def check_light_status(threadName, delay):
     count = 0
+    temp = "tv off"
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(18, GPIO.OUT)
     while count < float('inf'):
@@ -21,13 +22,15 @@ def check_light_status(threadName, delay):
             GPIO.output(18, GPIO.LOW)
 ##            GPIO.cleanup()
             print('Light off!')
-        if data['tv']['status'] == 'tv on' or data['tv']['status'] == 'tv off':
-##            rtn = subprocess.call(["irsend", "SEND_ONCE", "/home/pi/lircd.conf", "KEY_POWER"])
-              irsend.send_once('/home/pi/lircd.conf', ['KEY_POWER'])
-              if data['tv']['status'] == 'tv on':
-                  print("TV on!")
-              elif data['tv']['status'] == 'tv off':
-                  print("TV off!")
+        if data['tv']['status'] == 'tv on' and temp == 'tv off':
+            temp = data['tv']['status']
+            irsend.send_once('/home/pi/lircd.conf', ['KEY_POWER'])
+            print("TV on!")
+        if data['tv']['status'] == 'tv off' and temp == 'tv on':
+            temp = data['tv']['status']
+            irsend.send_once('/home/pi/lircd.conf', ['KEY_POWER'])
+            print("TV off!")
+            
 
 check_light_status("Device", 1)
 

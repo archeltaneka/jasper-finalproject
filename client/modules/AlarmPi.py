@@ -138,7 +138,7 @@ def handle(text, mic, profile):
         else:
             hourString = str(hour)+ " am"
 
-        print("Setting alarm for " + weekdayString +" at "+ hourString)
+        mic.say("Setting alarm for " + weekdayString +" at "+ hourString)
 
         os.system("cd /home/pi && "+cronString)
 
@@ -153,7 +153,7 @@ def handle(text, mic, profile):
         os.system(command)
         
         xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
-        print("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
+        mic.say("I set your alarm for "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
     
     elif "everyday" in alarm.lower():
         hour, minute = possibleinput(alarm)
@@ -168,7 +168,7 @@ def handle(text, mic, profile):
         else:
             hourString = str(hour)+ " am"
 
-        print("Setting alarm everyday " +" at "+ hourString)
+        mic.say("Setting alarm everyday " +" at "+ hourString)
 
         os.system("cd /home/pi && "+cronString)
 
@@ -184,7 +184,7 @@ def handle(text, mic, profile):
         os.system(command)
         
         xHoursFromNow = datetime.now() + timedelta(hours=int(hour))
-        print("I set your alarm for tomorrow at "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
+        mic.say("I set your alarm for tomorrow at "+ str(xHoursFromNow.hour)+" "+ str(xHoursFromNow.minute)+". ")
 
 def isValid(text):
     return bool(re.search(r'\b(((add|set) (a|another|an) (alarm|clock)|wake me))\b', text, re.IGNORECASE))
