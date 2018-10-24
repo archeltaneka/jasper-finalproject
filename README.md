@@ -7,22 +7,34 @@ Jasper is covered by the MIT license, a permissive free software license that le
 
 *Note that this licensing only refers to the Jasper client code (i.e.,  the code on GitHub) and not to the disk image itself (i.e., the code on SourceForge).*
 
-## Update Logs
+## Documentation
+### 1. Installation
+Go to [Jasper Official Web](http://www.jasperproject.github.io/documentation) for a complete documentation, but instead I refer to [this video](https://www.youtube.com/watch?v=ZOEl527SpFI&t=2059s)
+#### I found these errors while installing that might be useful:
+```
+sudo pip install --upgrade gTTS
+```
+- ImportError: Cannot import name IncompleteRead
+> Solution
+```
+rm -rf /usr/lib/python2.7/dist-packages/requests*
+```
+This is caused by IncompleteLibrary function is deprecated on pip higher version
 
-Sep 24, 2018
-1. Added lights module (TurnOn.py and Turnoff.py)
-2. Small fix on weather module
+- ImportError: No module named req
+> Solution
+```
+sudo python -m pip install --upgrade pip==9.0.3
+```
+Change the pip version of your system
 
-Sep 25, 2018
-1. Small fix on light module
-2. Added shutdown module
-3. Fix on LightOn.py
+```
+./python.py
+```
+AttributeError: 'NoneType' object has no attribute 'group'
+> Solution
+Go to this [discussion] (https://github.com/Boudewijn26/gTTS-token/pull/8/commits/8af6d4b1a672275c506f21af8cfc9ed0c4d4d31a
+https://github.com/Boudewijn26/gTTS-token/pull/8/commits/42936a779eae5a411d2be0da56cdb386a4123a0a)
 
-Sep 26, 2018
-1. Fix on both light module (outdated version)
-2. Change on weather module (use openweathermap api)
 
-Sep 29, 2018
-1. Fix on shutdown module
-2. Fix on music module and add another modules necessary
-3. Added AlarmPi module
+ 
